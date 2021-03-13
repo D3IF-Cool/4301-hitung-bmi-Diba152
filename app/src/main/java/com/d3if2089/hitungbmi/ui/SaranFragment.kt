@@ -19,6 +19,7 @@ class SaranFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSaranBinding.inflate(layoutInflater, container, false)
+        updateUI(KategoriBmi.KURUS)
         return binding.root
     }
 
