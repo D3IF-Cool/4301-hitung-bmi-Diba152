@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.d3if2089.hitungbmi.data.HasilBmi
 import com.d3if2089.hitungbmi.data.KategoriBmi
 
-class HitungViewModel: ViewModel() {
+class HitungViewModel : ViewModel() {
 
     //Hasil BMI bisa null jika pengguna belum menghitung BMI
     private val hasilBmi = MutableLiveData<HasilBmi?>()
@@ -26,7 +26,7 @@ class HitungViewModel: ViewModel() {
         } else {
             when {
                 bmi < 18.5 -> KategoriBmi.KURUS
-                bmi >=25.0 -> KategoriBmi.GEMUK
+                bmi >= 25.0 -> KategoriBmi.GEMUK
                 else -> KategoriBmi.IDEAL
             }
         }

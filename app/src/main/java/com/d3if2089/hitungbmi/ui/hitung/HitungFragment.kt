@@ -8,12 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.d3if2089.hitungbmi.R
 import com.d3if2089.hitungbmi.data.KategoriBmi
 import com.d3if2089.hitungbmi.databinding.FragmentHitungBinding
-import com.d3if2089.hitungbmi.ui.hitung.HitungFragmentDirections
 
 class HitungFragment : Fragment() {
 
@@ -26,11 +24,12 @@ class HitungFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHitungBinding.inflate(
-            layoutInflater, container, false)
-        binding.button.setOnClickListener {hitungBmi()}
-        binding.resetButton.setOnClickListener {resetBmi()}
+            layoutInflater, container, false
+        )
+        binding.button.setOnClickListener { hitungBmi() }
+        binding.resetButton.setOnClickListener { resetBmi() }
         binding.saranButton.setOnClickListener { viewModel.mulaiNavigasi() }
-        binding.shareButton.setOnClickListener {shareData()}
+        binding.shareButton.setOnClickListener { shareData() }
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -40,8 +39,10 @@ class HitungFragment : Fragment() {
 
         viewModel.getNavigasi().observe(viewLifecycleOwner) {
             if (it == null) return@observe
-            findNavController().navigate(HitungFragmentDirections
-                .actionHitungFragmentToSaranFragment(it))
+            findNavController().navigate(
+                HitungFragmentDirections
+                    .actionHitungFragmentToSaranFragment(it)
+            )
             viewModel.selesaiNavigasi()
         }
 
@@ -73,7 +74,7 @@ class HitungFragment : Fragment() {
         }
         val isMale = selectedId == R.id.priaRadioButton
 
-        viewModel.hitungBmi(berat,tinggi,isMale)
+        viewModel.hitungBmi(berat, tinggi, isMale)
 
     }
 
@@ -101,12 +102,14 @@ class HitungFragment : Fragment() {
             getString(R.string.pria)
         else
             getString(R.string.wanita)
-        val message = getString(R.string.bagikan_template,
-        binding.beratEditText.text,
-        binding.tinggiEditText.text,
-        gender,
-        binding.bmiTextView.text,
-        binding.kategoriTextView.text)
+        val message = getString(
+            R.string.bagikan_template,
+            binding.beratEditText.text,
+            binding.tinggiEditText.text,
+            gender,
+            binding.bmiTextView.text,
+            binding.kategoriTextView.text
+        )
 
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain").putExtra(Intent.EXTRA_TEXT, message)
